@@ -1,6 +1,6 @@
 ---
 theme: seriph
-background: https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1920&h=1080&fit=crop
+background: https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop
 title: Fullstack Deployment Workshop - Docker, CI/CD & Cloud
 class: text-center
 transition: slide-left
@@ -26,7 +26,7 @@ seoMeta:
   ogType: website
   ogTitle: Fullstack Deployment Workshop - Docker, CI/CD & Cloud
   ogDescription: Master Docker, GitHub Actions, Vercel, and Spring Boot cloud deployment.
-  ogImage: https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&h=630&fit=crop
+  ogImage: https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=630&fit=crop
 
 htmlAttrs:
   lang: en
