@@ -61,11 +61,24 @@ Automatically **deploy** code to production after CI passes.
 
 ## Workflow Overview
 
+```mermaid
+flowchart LR
+    A[Push to main] --> B[Run tests]
+    B --> C[Build]
+    C --> D[Deploy]
+
+    style A fill:#3B82F6,color:#fff
+    style B fill:#8B5CF6,color:#fff
+    style C fill:#F59E0B,color:#fff
+    style D fill:#10B981,color:#fff
 ```
-Push to main -> Run tests -> Build -> Deploy
-     |              |         |        |
-   Event         Job 1     Job 2    Job 3
-```
+
+<div class="flex justify-around text-xs mt-2 text-slate-400">
+  <span>Event</span>
+  <span>Job 1</span>
+  <span>Job 2</span>
+  <span>Job 3</span>
+</div>
 
 </div>
 
@@ -75,27 +88,40 @@ Push to main -> Run tests -> Build -> Deploy
 
 # CI/CD Flow
 
+
+<br />
+
+**Pull Request**
+
+```mermaid
+flowchart LR
+    A[PR] --> B[Lint + Test + Build]
+    B --> C{Pass?}
+    C -->|Yes| D[Merge]
+
+    style A fill:#3B82F6,color:#fff
+    style B fill:#8B5CF6,color:#fff
+    style C fill:#F59E0B,color:#fff
+    style D fill:#10B981,color:#fff
 ```
-Pull Request                          Push to Main
-     │                                      │
-     ▼                                      ▼
-┌─────────┐                          ┌─────────────┐
-│  Lint   │──┐                       │ Build Image │
-└─────────┘  │                       └──────┬──────┘
-             │  All pass?                   │
-┌─────────┐  ├────────────► Merge ──────────┤
-│  Test   │──┤                              ▼
-└─────────┘  │                       ┌─────────────┐
-             │                       │ Push to     │
-┌─────────┐  │                       │ Registry    │
-│  Build  │──┘                       └──────┬──────┘
-└─────────┘                                 │
-                                            ▼
-                                     ┌─────────────┐
-                                     │ Deploy to   │
-                                     │ Server      │
-                                     └─────────────┘
+
+
+
+**Push to Main**
+
+```mermaid
+flowchart LR
+    A[Push] --> B[Build Image]
+    B --> C[Push Registry]
+    C --> D[Deploy]
+
+    style A fill:#3B82F6,color:#fff
+    style B fill:#8B5CF6,color:#fff
+    style C fill:#EC4899,color:#fff
+    style D fill:#10B981,color:#fff
 ```
+
+
 
 ---
 

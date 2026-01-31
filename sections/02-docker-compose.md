@@ -300,12 +300,14 @@ environment:
 
 ### The Problem
 
-```
-Container stopped/removed
-        ↓
-All data inside is LOST!
-        ↓
-Database gone, uploads gone
+```mermaid
+flowchart TB
+    A[Container stopped/removed] --> B[All data inside is LOST!]
+    B --> C[Database gone, uploads gone]
+
+    style A fill:#EF4444,color:#fff
+    style B fill:#EF4444,color:#fff
+    style C fill:#EF4444,color:#fff
 ```
 
 Containers are **ephemeral** - they don't persist data by default.
@@ -316,12 +318,14 @@ Containers are **ephemeral** - they don't persist data by default.
 
 ### The Solution: Volumes
 
-```
-Container writes to volume
-        ↓
-Data stored on HOST machine
-        ↓
-Container removed? Data survives!
+```mermaid
+flowchart TB
+    A[Container writes to volume] --> B[Data stored on HOST machine]
+    B --> C[Container removed? Data survives!]
+
+    style A fill:#10B981,color:#fff
+    style B fill:#10B981,color:#fff
+    style C fill:#10B981,color:#fff
 ```
 
 Volumes **persist data** outside the container lifecycle.
@@ -454,16 +458,39 @@ curl frontend  # Works!
 
 ### Why custom networks?
 
-```
-Without isolation:
-frontend ↔ backend ↔ db
-frontend ↔ db  ← Security risk!
+<div class="text-xs">
 
-With isolation:
-frontend ↔ backend (frontend-net)
-backend ↔ db (backend-net)
-frontend ✗ db  ← Protected!
-```
+<div class="p-2 bg-red-500 bg-opacity-10 rounded mb-2">
+
+**Without isolation:**
+
+<div class="flex items-center justify-center gap-2 mt-1">
+  <span class="px-2 py-1 border border-slate-400 rounded">frontend</span>
+  <span>↔</span>
+  <span class="px-2 py-1 border border-slate-400 rounded">backend</span>
+  <span>↔</span>
+  <span class="px-2 py-1 border border-slate-400 rounded">db</span>
+</div>
+<div class="text-center text-red-400 mt-1">frontend ↔ db = Security risk!</div>
+
+</div>
+
+<div class="p-2 bg-green-500 bg-opacity-10 rounded">
+
+**With isolation:**
+
+<div class="flex items-center justify-center gap-2 mt-1">
+  <span class="px-2 py-1 border border-blue-400 rounded">frontend</span>
+  <span>↔</span>
+  <span class="px-2 py-1 border border-purple-400 rounded">backend</span>
+  <span>↔</span>
+  <span class="px-2 py-1 border border-amber-400 rounded">db</span>
+</div>
+<div class="text-center text-green-400 mt-1">frontend ✗ db = Protected!</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -495,28 +522,37 @@ networks:
 
 # Networks - Visual Example
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    frontend-net                          │
-│  ┌──────────────┐              ┌──────────────┐         │
-│  │   frontend   │◄────────────►│   backend    │         │
-│  │   :3000      │              │   :8080      │         │
-│  └──────────────┘              └──────┬───────┘         │
-└─────────────────────────────────────────┼───────────────┘
-                                          │
-┌─────────────────────────────────────────┼───────────────┐
-│                    backend-net          │               │
-│                                ┌────────▼───────┐       │
-│                                │      db        │       │
-│                                │    :5432       │       │
-│                                └────────────────┘       │
-└─────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph FN["frontend-net"]
+        F[frontend<br/>:3000]
+        B1[backend<br/>:8080]
+        F <--> B1
+    end
 
-frontend can reach: backend ✓
-backend can reach:  frontend ✓, db ✓
-db can reach:       backend ✓
-frontend can reach: db ✗ (different network!)
+    subgraph BN["backend-net"]
+        B2[backend<br/>:8080]
+        D[db<br/>:5432]
+        B2 <--> D
+    end
+
+    style F fill:#3B82F6,color:#fff
+    style B1 fill:#8B5CF6,color:#fff
+    style B2 fill:#8B5CF6,color:#fff
+    style D fill:#F59E0B,color:#fff
 ```
+
+<div class="grid grid-cols-2 gap-4 mt-4 text-sm">
+  <div class="p-2 bg-green-500 bg-opacity-10 rounded">
+    <span class="text-blue-400">frontend</span> can reach: backend ✓<br/>
+    <span class="text-purple-400">backend</span> can reach: frontend ✓, db ✓<br/>
+    <span class="text-amber-400">db</span> can reach: backend ✓
+  </div>
+  <div class="p-2 bg-red-500 bg-opacity-10 rounded">
+    <span class="text-blue-400">frontend</span> can reach db: ✗<br/>
+    <span class="text-slate-400 text-xs">(different network!)</span>
+  </div>
+</div>
 
 ---
 

@@ -27,17 +27,23 @@ Understanding containerization fundamentals
 
 ## Architecture
 
-```
-+-----------------------------------+
-|        Your Application           |
-+-----------------------------------+
-|  Dependencies + Runtime + Config  |
-+-----------------------------------+
-|          Docker Engine            |
-+-----------------------------------+
-|            Host OS                |
-+-----------------------------------+
-```
+<div class="flex flex-col gap-1 text-xs">
+  <div class="p-2 border-2 border-blue-400 rounded text-center font-bold bg-blue-500 bg-opacity-10">
+    Your Application
+  </div>
+  <div class="text-center text-slate-400">↓</div>
+  <div class="p-2 border-2 border-purple-400 rounded text-center font-bold bg-purple-500 bg-opacity-10">
+    Dependencies + Runtime + Config
+  </div>
+  <div class="text-center text-slate-400">↓</div>
+  <div class="p-2 border-2 border-amber-400 rounded text-center font-bold bg-amber-500 bg-opacity-10">
+    Docker Engine
+  </div>
+  <div class="text-center text-slate-400">↓</div>
+  <div class="p-2 border-2 border-green-400 rounded text-center font-bold bg-green-500 bg-opacity-10">
+    Host OS
+  </div>
+</div>
 
 </div>
 
@@ -52,17 +58,18 @@ Understanding containerization fundamentals
 
 ## Virtual Machines
 
-```
-+---------+ +---------+
-|  App A  | |  App B  |
-+---------+ +---------+
-| Guest OS| | Guest OS|
-+---------+-+---------+
-|     Hypervisor      |
-+---------------------+
-|      Host OS        |
-+---------------------+
-```
+<div class="flex flex-col gap-1 text-xs">
+  <div class="flex gap-1">
+    <div class="flex-1 p-1.5 border-2 border-blue-400 rounded text-center bg-blue-500 bg-opacity-10">App A</div>
+    <div class="flex-1 p-1.5 border-2 border-blue-400 rounded text-center bg-blue-500 bg-opacity-10">App B</div>
+  </div>
+  <div class="flex gap-1">
+    <div class="flex-1 p-1.5 border-2 border-red-400 rounded text-center bg-red-500 bg-opacity-10">Guest OS</div>
+    <div class="flex-1 p-1.5 border-2 border-red-400 rounded text-center bg-red-500 bg-opacity-10">Guest OS</div>
+  </div>
+  <div class="p-1.5 border-2 border-purple-400 rounded text-center bg-purple-500 bg-opacity-10">Hypervisor</div>
+  <div class="p-1.5 border-2 border-slate-400 rounded text-center bg-slate-500 bg-opacity-10">Host OS</div>
+</div>
 
 - Heavy (GBs)
 - Slow startup (minutes)
@@ -73,15 +80,14 @@ Understanding containerization fundamentals
 
 ## Containers
 
-```
-+---------+ +---------+
-|  App A  | |  App B  |
-+---------+-+---------+
-|    Docker Engine    |
-+---------------------+
-|      Host OS        |
-+---------------------+
-```
+<div class="flex flex-col gap-1 text-xs">
+  <div class="flex gap-1">
+    <div class="flex-1 p-1.5 border-2 border-blue-400 rounded text-center bg-blue-500 bg-opacity-10">App A</div>
+    <div class="flex-1 p-1.5 border-2 border-blue-400 rounded text-center bg-blue-500 bg-opacity-10">App B</div>
+  </div>
+  <div class="p-1.5 border-2 border-amber-400 rounded text-center bg-amber-500 bg-opacity-10">Docker Engine</div>
+  <div class="p-1.5 border-2 border-green-400 rounded text-center bg-green-500 bg-opacity-10">Host OS</div>
+</div>
 
 - Lightweight (MBs)
 - Fast startup (seconds)

@@ -28,14 +28,42 @@ Deploy to Railway
 
 ## Traditional vs Jib
 
-```
-Traditional:
-Source -> Build JAR -> Dockerfile
-      -> docker build -> docker push
+<div class="text-xs">
 
-With Jib:
-Source -> mvn jib:build -> Done!
+<div class="p-2 bg-red-500 bg-opacity-10 rounded mb-2">
+
+**Traditional:**
+
+```mermaid
+flowchart LR
+    A[Source] --> B[Build JAR]
+    B --> C[Dockerfile]
+    C --> D[docker build]
+    D --> E[docker push]
+
+    style A fill:#64748b,color:#fff
+    style E fill:#64748b,color:#fff
 ```
+
+</div>
+
+<div class="p-2 bg-green-500 bg-opacity-10 rounded">
+
+**With Jib:**
+
+```mermaid
+flowchart LR
+    A[Source] --> B[mvn jib:build]
+    B --> C[Done!]
+
+    style A fill:#10B981,color:#fff
+    style B fill:#10B981,color:#fff
+    style C fill:#10B981,color:#fff
+```
+
+</div>
+
+</div>
 
 </div>
 

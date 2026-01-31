@@ -22,29 +22,33 @@ Bringing it all together
 
 # Deployment Architecture
 
+```mermaid
+flowchart LR
+    A[Push] --> B[GitHub Actions]
+    B --> C[Vercel]
+    B --> D[Railway]
+    C <-->|API| D
+
+    style A fill:#3B82F6,color:#fff
+    style B fill:#8B5CF6,color:#fff
+    style C fill:#10B981,color:#fff
+    style D fill:#F59E0B,color:#fff
 ```
-+--------------------------------------------------------------+
-|                        GitHub                                 |
-|  +-----------+    +-----------------------------+             |
-|  |   Push    |--->|     GitHub Actions          |             |
-|  +-----------+    |  +-------+  +------------+  |             |
-|                   |  | Lint  |  | Build+Push |  |             |
-|                   |  +-------+  +------------+  |             |
-|                   +-------------+---------------+             |
-+-----------------------------+--------------------------------+
-                              |
-           +------------------+------------------+
-           |                                     |
-           v                                     v
-   +---------------+                  +------------------+
-   |    Vercel     |                  |     Railway      |
-   |  (Frontend)   |                  |    (Backend)     |
-   |               |<---- API ------->|                  |
-   |  Next.js      |                  |  Spring Boot     |
-   |  Auto SSL     |                  |  PostgreSQL      |
-   |  Edge CDN     |                  |  Auto SSL        |
-   +---------------+                  +------------------+
-```
+
+<div class="grid grid-cols-3 gap-4 mt-4 text-sm">
+  <div class="p-3 bg-blue-500 bg-opacity-10 rounded">
+    <div class="font-bold text-blue-400">GitHub</div>
+    <div class="text-xs mt-1">Push | Actions | CI/CD</div>
+  </div>
+  <div class="p-3 bg-green-500 bg-opacity-10 rounded">
+    <div class="font-bold text-green-400">Vercel (Frontend)</div>
+    <div class="text-xs mt-1">Next.js | Auto SSL | Edge CDN</div>
+  </div>
+  <div class="p-3 bg-amber-500 bg-opacity-10 rounded">
+    <div class="font-bold text-amber-400">Railway (Backend)</div>
+    <div class="text-xs mt-1">Spring Boot | PostgreSQL | Auto SSL</div>
+  </div>
+</div>
 
 ---
 
